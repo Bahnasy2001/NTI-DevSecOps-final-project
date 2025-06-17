@@ -86,6 +86,10 @@ resource "aws_s3_bucket_policy" "elb_logging_policy" {
   policy = data.aws_iam_policy_document.elb_logging.json
 }
 
+resource "aws_s3_bucket" "elb_logs_access" {
+  bucket = "${var.bucket_name}-access"
+}
+
 resource "aws_s3_bucket_logging" "elb_logs" {
   bucket = aws_s3_bucket.elb_logs.id
 
