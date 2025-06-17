@@ -11,7 +11,7 @@ resource "aws_iam_openid_connect_provider" "eks" {
 
 data "tls_certificate" "eks" {
   url = aws_eks_cluster.aws_eks.identity[0].oidc[0].issuer
-  
+
   depends_on = [aws_eks_cluster.aws_eks]
 }
 
@@ -74,3 +74,9 @@ resource "kubernetes_service_account" "alb_sa" {
 #   annotations:
 #     alb.ingress.kubernetes.io/load-balancer-attributes: access_logs.s3.enabled=true,access_logs.s3.bucket=eks-alb-logs-hassan-XXXX
 
+
+# alb.ingress.kubernetes.io/load-balancer-attributes: |
+#   access_logs.s3.enabled=true,
+#   access_logs.s3.bucket=eks-alb-logs-hassan-xxxx,
+#   access_logs.s3.prefix=my-logs,
+#   access_logs.s3.bucket-owner-full-control.enabled=true
